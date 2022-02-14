@@ -1,3 +1,22 @@
 from django.db import models
+from core import models as core_models
 
-# Create your models here.
+# trip model 만들기 #5-3 2:10 참고
+
+
+class Conversation(core_models.TimeStampedModel):
+
+    participants = models.ManyToManyField("users.User", blank=True)
+
+    def __str__(self):
+        return str(self.created)
+
+
+class Message(core_models.TimeStampedModel):
+
+    message = models.TextField()
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    conversation = models.ForeignKey("Conversation", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} says: {self.message}"
