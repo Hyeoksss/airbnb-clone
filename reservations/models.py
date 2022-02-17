@@ -4,7 +4,7 @@ from core import models as core_models
 # 예약 취소 확정 등 추가 기능 확장하기
 class Reservation(core_models.TimeStampedModel):
 
-    """Reservation Nidel Definition"""
+    """Reservation Model Definition"""
 
     STATUS_PENDING = "pending"
     STATUS_CONFIRMED = "confirmed"
@@ -21,8 +21,12 @@ class Reservation(core_models.TimeStampedModel):
     )
     check_in = models.DateField()
     check_output = models.DateField()
-    guest = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    room = models.ForeignKey("rooms.Room", on_delete=models.CASCADE)
+    guest = models.ForeignKey(
+        "users.User", related_name="reservations", on_delete=models.CASCADE
+    )
+    room = models.ForeignKey(
+        "rooms.Room", related_name="reservations", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.room} - {self.check_in}"
