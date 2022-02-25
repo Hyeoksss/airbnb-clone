@@ -16,8 +16,10 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        # get the number from the console
         number = options.get("number")
         seeder = Seed.seeder()
+        # 1 -> model, 2 -> number(int), 3 -> customFieldFormatters(dict, default는 None)
         seeder.add_entity(
             User,
             number,

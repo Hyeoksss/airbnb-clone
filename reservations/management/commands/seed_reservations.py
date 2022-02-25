@@ -26,6 +26,7 @@ class Command(BaseCommand):
         seeder = Seed.seeder()
         users = user_models.User.objects.all()
         rooms = room_models.Room.objects.all()
+        # lambda 대신에 random을 쓰면 50를 생성했을 때  각각 다른 변수를 가져야 하는데 다 같은 값을 가지게 된다
         seeder.add_entity(
             reservation_models.Reservation,
             number,

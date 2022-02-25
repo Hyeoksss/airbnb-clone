@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from rooms.models import Amenity
 
 
+# fake data를 만들어주는 custom command를 만든다
 class Command(BaseCommand):
 
     help = "This command creates amenities"

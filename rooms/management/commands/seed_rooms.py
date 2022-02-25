@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
     help = "This command creates rooms"
 
+    # 인자 전달
     def add_arguments(self, parser):
         parser.add_argument(
             "--number",
@@ -18,9 +19,14 @@ class Command(BaseCommand):
             help="How many rooms do you want to create?",
         )
 
+    # 실질적인 역할 수행
     def handle(self, *args, **options):
+        # get number from console
         number = options.get("number")
+        # 데이터를 seed하기 위한 사전준비
         seeder = Seed.seeder()
+        # seeder는 foriegn key를 활용할 수 없다
+        # 하지만 데이터가 클 경우는 다른 방법을 써야 함
         all_users = user_models.User.objects.all()
         room_types = room_models.RoomType.objects.all()
         seeder.add_entity(
@@ -37,8 +43,11 @@ class Command(BaseCommand):
                 "price": lambda x: random.randint(1, 300),
             },
         )
-        created_photos = seeder.execute()
-        created_clean = flatten(list(created_photos.values()))
+        # seeder.execute를 통해 room-data를 만들고 그것을 created_rooms에 저장
+        created_rooms = seeder.execute()
+        # flatten을 통해 id(primary key)값을 얻는다
+        # 왜 primary key가 1부터 시작안하고 272부터 시작할까?
+        created_clean = flatten(list(created_rooms.values()))
         amenities = room_models.Amenity.objects.all()
         facilities = room_models.Facility.objects.all()
         rules = room_models.HouseRule.objects.all()
@@ -51,16 +60,16 @@ class Command(BaseCommand):
                     file=f"room_photos/{random.randint(1, 31)}.webp",
                 )
             for a in amenities:
-                magic_num = random.randint(0, 15)
-                if magic_num % 2 == 0:
+                pick_num = random.randint(0, 15)
+                if pick_num % 2 == 0:
                     room.amenities.add(a)
             for f in facilities:
-                magic_num = random.randint(0, 15)
-                if magic_num % 2 == 0:
+                pick_num = random.randint(0, 15)
+                if pick_num % 2 == 0:
                     room.facilities.add(f)
             for r in rules:
-                magic_num = random.randint(0, 15)
-                if magic_num % 2 == 0:
+                pick_num = random.randint(0, 15)
+                if pick_num % 2 == 0:
                     room.house_rules.add(r)
 
         self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
