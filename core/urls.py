@@ -6,5 +6,7 @@ app_name = "core"
 
 # 맨 처음 화면에 방들을 보여주고 싶은거니까 room을 import - > home화면에 보여줌
 urlpatterns = [
-    path("", room_views.all_rooms, name="home"),
+    # HomeView는 class이기떄문에 asview써야함
+    # path -> 1.url 2. function
+    path("", room_views.Homeview.as_view(), name="home"),
 ]
