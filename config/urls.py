@@ -22,6 +22,7 @@ urlpatterns = [
     # "" = / -> empty
     # namespace 를 지정할 때 app name이 있어야 한다
     path("", include("core.urls", namespace="core")),
+    path("rooms/", include("rooms.urls", namespace="rooms")),
     path("admin/", admin.site.urls),
 ]
 
