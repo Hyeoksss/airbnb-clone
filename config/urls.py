@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     # "" = / -> empty
     # namespace 를 지정할 때 app name이 있어야 한다
+    # namespace -> appname ->{% url 'rooms:search' %} 이런식으로 template에서 사용가능
     path("", include("core.urls", namespace="core")),
     path("rooms/", include("rooms.urls", namespace="rooms")),
     path("admin/", admin.site.urls),

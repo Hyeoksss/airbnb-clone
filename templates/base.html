@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{%block page_name %}{%endblock page_name %}| Hbnb</title>
+    <title>{%block page_title %}{%endblock page_title %}| Hbnb</title>
 </head>
 
 <body>
 
-    {% include "partials/header.html" %}
+    <header>
+        {% include "partials/nav.html" %}
 
+        <!-- 어느 페이지에서나 보이길 원함 그래서 search.html에다가 안만들고 여기만듬 -->
+        <!-- 여기에서는 보이고 searchform이 search.html에서는 안보임 숨김의 효과 -->
+        {% block search-bar %}
+        <form method="get" action="{% url 'rooms:search' %}">
+            <input name="city" placeholder="Search by City" />
+        </form>
+        {% endblock search-bar %}
+    </header>
+
+    <!-- room list에서 extend를 했기 떄문에 이렇게 하면 roomlist 사용 가능 -->
     {% block content %}{% endblock content %}
 
     {% include "partials/footer.html" %}
