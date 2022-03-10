@@ -7,9 +7,7 @@ Search
 
 <!-- 그래서 이것을 비워놓으면 보이지 않게 된다 -->
 <!-- 이곳에 따로 form.을 가지고 싶기 때문이다 -->
-{% block search-bar %}
-{% endblock search-bar %}
-
+{% block search-bar %}{% endblock search-bar %}
 
 {% block content %}
 
@@ -24,17 +22,62 @@ Search
         <label for="country">Country</label>
         <select id="country" name="country">
             {% for country in countries %}
-            <option value="{{country.code}}">{{country.name}}</option>
+            <!--country.code database에 있는 국가코드 즉 from에서 선택한 것-->
+            <!--s_country request를 통해 받는 정보 즉 user가 선택해서 request를 한 것-->
+            <option value="{{country.code}}" {% if country.code is s_country %}selected{% endif %}>{{country.name}}</option>
             {% endfor %}
         </select>
     </div>
     <div>
         <label for="room_type">Room Type</label>
         <select id="room_type" name="room_type">
+            <option value="0" {% if s_room_type is 0 %}selected{% endif %}>Any kind</option>
             {% for room_type in room_types %}
-            <option value="{{room_type.pk}}">{{room_type.name}}</option>
+            <option value="{{room_type.pk}}" {% if room_type.pk is s_room_type %}selected{% endif %}>{{room_type.name}}</option>
             {% endfor %}
         </select>
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input value="{{price}}" type="number" name="price" id="price" placeholder="Price" />
+    </div>
+    <div>
+        <label for="guests">Guests</label>
+        <input value="{{guests}}" type="number" name="guests" id="guests" placeholder="Guests" />
+    </div>
+    <div>
+        <label for="bedrooms">Bedrooms</label>
+        <input value="{{bedrooms}}" type="number" name="bedrooms" id="bedrooms" placeholder="Bedrooms" />
+    </div>
+    <div>
+        <label for="beds">Beds</label>
+        <input value="{{beds}}" type="number" name="beds" id="beds" placeholder="Beds" />
+    </div>
+    <div>
+        <label for="baths">Baths</label>
+        <input value="{{baths}}" type="number" name="baths" id="baths" placeholder="Baths" />
+    </div>
+    <div>
+        <h3>Amenities</h3>
+        <ul>
+            {% for amenity in amenities %}
+            <li>
+                <label for="a_{{amenity.pk}}">{{amenity.name}}</label>
+                <input id="a_{{amenity.pk}}" name="amenities" type="checkbox" value={{amenity.pk}} />
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h3>Facilities</h3>
+        <ul>
+            {% for facility in facilities %}
+            <li>
+                <label for="f_{{facility.pk}}">{{facility.name}}</label>
+                <input id="f_{{facility.pk}}" name="facilities" type="checkbox" value={{facility.pk}} />
+            </li>
+            {% endfor %}
+        </ul>
     </div>
     <button>Search</button>
 </form>
