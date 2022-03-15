@@ -4,6 +4,8 @@ from . import models
 
 # From Field renders Widget
 # Widget is HTML element
+
+
 class SearchForm(forms.Form):
 
     city = forms.CharField(initial="Anywhere")

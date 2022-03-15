@@ -24,6 +24,7 @@ urlpatterns = [
     # namespace -> appname ->{% url 'rooms:search' %} 이런식으로 template에서 사용가능
     path("", include("core.urls", namespace="core")),
     path("rooms/", include("rooms.urls", namespace="rooms")),
+    path("users/", include("users.urls", namespace="users")),
     path("admin/", admin.site.urls),
 ]
 
