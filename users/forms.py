@@ -11,6 +11,7 @@ class LoginForm(forms.Form):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
         try:
+            # username = email로 바꿔야함
             user = models.User.objects.get(email=email)
             if user.check_password(password):
                 return self.cleaned_data
@@ -28,6 +29,8 @@ class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
 
+    # 위에서 아래로 cleaned되어서 데이터가 된다
+    # 따라서 clean password을 사용하면 password1의 데이터를 얻을 수 없다
     def clean_password1(self):
         password = self.cleaned_data.get("password")
         password1 = self.cleaned_data.get("password1")
@@ -37,7 +40,10 @@ class SignUpForm(forms.ModelForm):
         else:
             return password
 
+    # override save method
     def save(self, *args, **kwargs):
+        # 오브젝트를 생성하지만 데이터베이스에 등록하고 싶지 않을 때 commmit = False사용
+        # Create, but don't save the new author instance
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")

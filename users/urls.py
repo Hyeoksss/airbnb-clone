@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# config에 있는 url에서 연결 가능하다
 app_name = "users"
 
 urlpatterns = [

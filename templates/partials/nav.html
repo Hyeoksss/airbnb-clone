@@ -5,6 +5,7 @@
     {% if user.is_authenticated %}
     <li><a href="{% url 'users:logout' %}">Log Out</a></li>
     {% else %}
+    <!-- "users:login"은 template의 users폴더의 login html파일로 링크-->
     <li><a href="{% url 'users:login' %}">Login</a></li>
     <li><a href="{% url 'users:signup' %}">Sign up</a></li>
     {% endif %}
