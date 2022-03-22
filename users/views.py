@@ -4,6 +4,7 @@ from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from . import forms
 
+
 # view 대신에 loginview를 사용하는 방법도 있따 #14-5
 
 
@@ -37,3 +38,12 @@ class SignUpView(FormView):
         "last_name": "Song",
         "email": "hyeok@song.com",
     }
+
+    def form_valid(self, form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
