@@ -100,7 +100,7 @@ def github_login(request):
     )
 
 
-# Check allow_signup - oauth
+# Check allow_signup - oauth 깃허브 아이디가 없을 때 깃허브 회원가입을 하게 해주는 기능 필요한지 선택
 
 
 class GithubException(Exception):
@@ -139,6 +139,7 @@ def github_callback(request):
                     user = models.User.objects.get(email=email)
                     try:
                         user = models.User.objects.get(email=email)
+                        # 깃헙로그인할떄오류남
                         if user.login_method != models.User.LOGIN_GITHUB:
                             raise GithubException()
                     except models.User.DoesNotExist:
