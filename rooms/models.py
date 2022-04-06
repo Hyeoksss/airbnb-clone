@@ -122,3 +122,8 @@ class Room(core_models.TimeStampedModel):
             return round(all_ratings / len(all_reviews), 1)
         else:
             return 0
+
+    def first_photo(self):
+        # want to get the value of queryset
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url

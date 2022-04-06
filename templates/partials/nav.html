@@ -1,13 +1,12 @@
-<a href="{% url 'core:home' %}">Hbnb</a>
-<ul>
+<ul class="flex items-center text-sm font-semibold h-full">
     <!--Django has Context processor that adds info to my templates-->
     <!--Bring cookies and find user and put it to the template authmatically-->
     {% if user.is_authenticated %}
-    <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+    <li class="nav_link"><a href="{% url 'users:logout' %}">Log Out</a></li>
     {% else %}
     <!-- "users:login"은 template의 users폴더의 login html파일로 링크-->
-    <li><a href="{% url 'users:login' %}">Login</a></li>
-    <li><a href="{% url 'users:signup' %}">Sign up</a></li>
+    <li class="nav_link"><a href="{% url 'users:login' %}">Login</a></li>
+    <li class="nav_link"><a href="{% url 'users:signup' %}">Sign up</a></li>
     {% endif %}
 
 </ul>
