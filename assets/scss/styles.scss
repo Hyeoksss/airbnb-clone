@@ -11,3 +11,7 @@
         @apply border-gray-600;
     }
 }
+
+.btn{
+    @apply rounded-sm py-5 font-medium text-lg;
+}
