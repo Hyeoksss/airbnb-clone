@@ -38,7 +38,6 @@ class LoginView(FormView):
     template_name = "users/login.html"
     form_class = forms.LoginForm
     success_url = reverse_lazy("core:home")
-    initial = {"email": "hyeok@song.com"}
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -61,11 +60,6 @@ class SignUpView(FormView):
     # view를 불러올 때 url이 아직 불려지지 않음 그래서 찾을 수 없다고 에러가 나온다
     # lazy를 써서 바로 실행하지 않고 필요할 때 실행되게 만든다
     success_url = reverse_lazy("core:home")
-    initial = {
-        "first_name": "Hyeok",
-        "last_name": "Song",
-        "email": "hyeok@song.com",
-    }
 
     def form_valid(self, form):
         form.save()

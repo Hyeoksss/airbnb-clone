@@ -22,7 +22,7 @@
             <!-- 여기에서는 보이고 searchform이 search.html에서는 안보임 숨김의 효과 -->
             {% block search-bar %}
             <form method="get" action="{% url 'rooms:search' %}" class="mb-0 w-9/12">
-                <input class="w-full border font-bold text-gray-600 placeholder-gray-600 px-5 py-3 rounded-md w-64 shadow-md hover:shadow-lg focus:outline-none transition ease-linear duration-200" name="city" placeholder="Search by City" />
+                <input class="w-full border-none font-bold text-gray-600 placeholder-gray-600 px-5 py-3 rounded-md w-64 shadow-md hover:shadow-lg focus:outline-none transition ease-linear duration-200" name="city" placeholder="Search by City" />
             </form>
             {% endblock search-bar %}
         </div>

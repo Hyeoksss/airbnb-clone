@@ -13,13 +13,7 @@ Log In
 <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border-2 p-6 border-gray-500">
     {% include "partials/social_login.html" %}
 
-    <form method="POST" action="{% url 'users:login' %}" class="w-full">
-        {% csrf_token %}
-        <!-- input이랑 btn style.scss로 옮겨서 또 사용하기 편하게 하기 일단 오류나서 안했음-->
-        <input type="email" placeholder="Email" class="btn text-left w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-teal-500 mb-3">
-        <input type="password" placeholder="Password" class="btn text-left w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-teal-500 mb-3">
-        <button class="btn bg-red-500 text-white w-full">Login</button>
-    </form>
+    {% include 'mixins/auth/auth_form.html' with form=form cta="Log in" %}
 
     <div class="mt-4">
         <span class="mr-2">Don't have an account?</span>
