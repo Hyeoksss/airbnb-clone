@@ -2,6 +2,7 @@
     <!--Django has Context processor that adds info to my templates-->
     <!--Bring cookies and find user and put it to the template authmatically-->
     {% if user.is_authenticated %}
+    <li class="nav_link"><a href="{{user.get_absolute_url}}">Profile</a></li>
     <li class="nav_link"><a href="{% url 'users:logout' %}">Log Out</a></li>
     {% else %}
     <!-- "users:login"은 template의 users폴더의 login html파일로 링크-->
