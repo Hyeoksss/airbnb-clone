@@ -82,3 +82,7 @@ form {
         @apply bg-yellow-600;
     }
 }
+
+.border-section {
+    @apply border-b border-gray-400 pb-8 mt-8;
+}
