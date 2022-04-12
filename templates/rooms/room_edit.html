@@ -4,6 +4,8 @@
 Update Room
 {% endblock page_title %}
 
+{% block search-bar %}
+{% endblock search-bar %}
 
 
 {% block content %}
@@ -12,6 +14,10 @@ Update Room
 
     {% include 'mixins/room/room_form.html' with form=form cta="Update Room" %}
 
+    <!--To do: make it interactive with react and js-->
+    <div class="mt-4">
+        <a href="{% url 'rooms:photos' room.pk %}" class="text-teal-500 font-semibold"><i class="far fa-camera"></i> Edit Photos</a>
+    </div>
 
 </div>
 
