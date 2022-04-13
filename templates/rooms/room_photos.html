@@ -10,7 +10,11 @@
 {% block content %}
 
 <div class="container mx-auto my-10 flex flex-col">
-    <a href="{% url 'rooms:edit' room.pk %}" class="py-3 rounded-lg font-medium text-lg w-64 text-center text-white bg-teal-500 mb-5 mx-auto">Back to Room Edit</a>
+
+    <div class="my-10 w-full">
+        <a href="{% url 'rooms:add-photo' room.pk %}" class="py-3 rounded-lg font-medium text-lg text-center text-white bg-red-500 w-1/6 block">Upload Photo</a>
+    </div>
+
     {% for photo in room.photos.all %}
     <div class="mb-5 p-6 border border-gray-400 flex justify-between">
         <div class="flex items-start">
@@ -18,11 +22,15 @@
             <span class="ml-5 text-xl">{{photo.caption}}</span>
         </div>
         <div class="flex flex-col w-1/5">
-            <a class="py-3 rounded-lg font-medium text-lg w-full text-center text-white mb-5 bg-teal-500" href="#">Edit</a>
+            <a class="py-3 rounded-lg font-medium text-lg w-full text-center text-white mb-5 bg-teal-500" href="{% url 'rooms:edit-photo' room.pk photo.pk %}">Edit</a>
             <a class="py-3 rounded-lg font-medium text-lg w-full text-center text-white bg-red-600" href="{% url 'rooms:delete-photo' room.pk photo.pk %}">Delete</a>
         </div>
     </div>
     {% endfor %}
+    <div class="flex justify-center mt-5">
+        <!-- {% url 'rooms:edit' room.pk %}-->
+        <a href="{{room.get_absolute_url}}edit" class="text-teal-500 font-medium text-2xl">Back to edit room</a>
+    </div>
 </div>
 
 {% endblock content %}
