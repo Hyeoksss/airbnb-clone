@@ -206,11 +206,10 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
 
 
 # 리액트 공부해서 drag and drop기능 추가하기
+# 방 삭제하는 기능 추가
 class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, FormView):
 
-    model = models.Photo
     template_name = "rooms/photo_create.html"
-    fields = ("caption", "file")
     form_class = forms.CreatePhotoForm
 
     def form_valid(self, form):
@@ -218,3 +217,18 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, FormView):
         form.save(pk)
         messages.success(self.request, "Photo Uploaded")
         return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
+
+
+class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
+
+    form_class = forms.CreateRoomForm
+    template_name = "rooms/room_create.html"
+
+    # save_m2m 은 model을 database에 저장한 후에 사용
+    def form_valid(self, form):
+        room = form.save()
+        room.host = self.request.user
+        room.save()
+        form.save_m2m()
+        messages.success(self.request, "Room Created")
+        return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))

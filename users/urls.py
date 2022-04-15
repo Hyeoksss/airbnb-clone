@@ -15,11 +15,12 @@ urlpatterns = [
     path(
         "verify/<str:key>/", views.conplete_verification, name="complete-verification"
     ),
-    path("<int:pk>/", views.UserProfileView.as_view(), name="profile"),
     path("update_profile", views.UpdateProfileView.as_view(), name="update"),
     path(
         "update_password",
         views.UpdatePasswordView.as_view(success_url=reverse_lazy("core:home")),
         name="password",
     ),
+    path("switch-hosting", views.switch_hosting, name="switch-hosting"),
+    path("<int:pk>/", views.UserProfileView.as_view(), name="profile"),
 ]

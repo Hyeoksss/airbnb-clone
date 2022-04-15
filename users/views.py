@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from users import models
 from django.contrib import messages
@@ -284,3 +285,12 @@ class UpdatePasswordView(
     template_name = "users/update_password.html"
     form_class = forms.UpdatePasswordForm
     success_message = "Password Updated"
+
+
+@login_required
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+    except KeyError:
+        request.session["is_hosting"] = True
+    return redirect(reverse("core:home"))

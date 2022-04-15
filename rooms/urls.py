@@ -5,6 +5,7 @@ app_name = "rooms"
 
 # path에 name을 지정해주면 어느 template에서든 간단하게 url로 연결시킬 수 있다.
 urlpatterns = [
+    path("create/", views.CreateRoomView.as_view(), name="create"),
     path("<int:pk>/", views.RoomDetail.as_view(), name="detail"),
     path("<int:pk>/edit/", views.EditRoomView.as_view(), name="edit"),
     path("<int:pk>/photos/", views.RoomPhotosView.as_view(), name="photos"),
