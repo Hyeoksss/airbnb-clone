@@ -97,7 +97,9 @@
     </div>
     <div class="w-1/3">
         {% if room.host == user %}
-        <a href="{% url 'rooms:edit' room.pk %}" class="btn-link block">Edit Room</a>
+        <a href="{% url 'rooms:edit' room.pk %}" class="py-3 rounded-lg font-medium text-lg w-full text-center bg-teal-500 text-white block mb-10">Edit Room</a>
+        <!--일단 버튼만 만들어 놓음 삭제하는 기능 추가하기-->
+        <a href="{% url 'rooms:edit' room.pk %}" class="btn-link block">Delete Room</a>
         {% endif %}
     </div>
 </div>

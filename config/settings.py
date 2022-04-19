@@ -143,7 +143,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
+# 사진들이 저장될 디렉토리의 위치를 정할 수 있다. 그래서 어드민엔서 사진으로 접근 가능하게 해줌
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+# 상대경로와 절대경로 공부하기
 
 MEDIA_URL = "/media/"
 

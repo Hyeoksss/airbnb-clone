@@ -33,8 +33,12 @@ class RoomAdmin(admin.ModelAdmin):
 
     """Room Admin Definition"""
 
+    # 장고가 자동으로 방의 foreignkey를 가지고 있는 이미지를 넣는다
+    # 모델에서 classPhoto는 room을 "Room"에서 가져오고 class Room이 존재하기 떄문에 알아서 매칭시켜준다
+    # 즉 fk로 연결된 방을 찾아준다는 것이다
     inlines = (PhotoInline,)
 
+    # classes collapse를 사용할 수도 있다
     fieldsets = (
         (
             "Basic Info",
@@ -50,16 +54,24 @@ class RoomAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
-        ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths")}),
+        (
+            "Times",
+            {"fields": ("check_in", "check_out", "instant_book")},
+        ),
+        (
+            "Spaces",
+            {"fields": ("guests", "beds", "bedrooms", "baths")},
+        ),
         (
             "More About the Space",
             {
-                "classes": ("collapse",),
                 "fields": ("amenities", "facilities", "house_rules"),
             },
         ),
-        ("Last Details", {"fields": ("host",)}),
+        (
+            "Last Details",
+            {"fields": ("host",)},
+        ),
     )
 
     list_display = (
@@ -91,6 +103,7 @@ class RoomAdmin(admin.ModelAdmin):
         "country",
     )
 
+    # 룸의 호스트는 일반유저가 아니라 호스트여야 해서 호스트들을 필터링하는 기능을 가지는 것이다
     raw_id_fields = ("host",)
 
     search_fields = ("city", "^host__username")
@@ -103,7 +116,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     # obj is manager can access element
     # self is room admin class
-    # obj is current row that registered in admin (#6-2)
+    # obj is current row that registered in admin (#6-2 3:20)
     def count_amenities(self, obj):
         return obj.amenities.count()
 

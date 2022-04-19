@@ -27,6 +27,8 @@ class Review(core_models.TimeStampedModel):
     # 이 함수를 모든 곳에 포함시키고 싶다면 모델에 함수를 만들어서 사용한다(어드민만을위한함수와는다르다)
     # 즉 함수를 실제 사용자들이 보는 페이지에도 쓰고 싶으면 모델에서 만들어야함
     # str함수를 list display에 쓸 수 있다, 커스텀함수를 모델에다 생성할 수 있다
+    # 어드민에서만 평균을 보이게 할려면 어드민에다가 쓰면 된다 그러나 이 리뷰값을 다른 곳에서도 쓸 것이기 때문에
+    # 모델에 작성한다
     def rating_average(self):
         avg = (
             self.accuracy
