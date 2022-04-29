@@ -106,7 +106,7 @@ class RoomAdmin(admin.ModelAdmin):
     # 룸의 호스트는 일반유저가 아니라 호스트여야 해서 호스트들을 필터링하는 기능을 가지는 것이다
     raw_id_fields = ("host",)
 
-    search_fields = ("city", "^host__username")
+    search_fields = ("city", "^host__username", "name")
 
     filter_horizontal = (
         "amenities",

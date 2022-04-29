@@ -3,9 +3,11 @@ from django.utils import timezone
 
 
 class Day:
-    def __init__(self, number, past):
+    def __init__(self, number, past, month, year):
         self.number = number
         self.past = past
+        self.month = month
+        self.year = year
 
     def __str__(self):
         return str(self.number)
@@ -18,18 +20,18 @@ class Calendar(calendar.Calendar):
         self.month = month
         self.day_names = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
         self.months = (
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
+            "January",
+            "Feburary",
+            "March",
+            "April",
             "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
         )
 
     def get_days(self):
@@ -44,7 +46,7 @@ class Calendar(calendar.Calendar):
                 if month == self.month:
                     if day <= today:
                         past = True
-                new_day = Day(day, past)
+                new_day = Day(number=day, past=past, month=self.month, year=self.year)
                 days.append(new_day)
         return days
 
