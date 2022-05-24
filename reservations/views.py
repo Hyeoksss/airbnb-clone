@@ -52,7 +52,7 @@ def edit_reservation(request, pk, verb):
         raise Http404()
     if verb == "confirm":
         reservation.status = models.Reservation.STATUS_CONFIRMED
-    elif verb == "cencel":
+    elif verb == "cancel":
         reservation.status = models.Reservation.STATUS_CANCELED
         models.BetweenDay.objects.filter(reservation=reservation).delete()
     reservation.save()
