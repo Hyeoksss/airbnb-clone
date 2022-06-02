@@ -10,7 +10,7 @@ Reservation {{reservation.check_in}}
 {% block content %}
 
 <div class="container mx-auto my-10 flex flex-col">
-
+    
     <div class="bg-cover bg-center h-56 rounded-t-lg" style="background-image: url({{reservation.room.first_photo}})"></div>
 
     <div class="flex flex-col items-start border-r border-t border-l border-b">
@@ -33,7 +33,7 @@ Reservation {{reservation.check_in}}
         <div class="py-10 px-5">
             {% if reservation.status != 'canceled' %}
                 {% if reservation.status == 'confirmed' and reservation.is_finished %}
-                <span class="font-semibold text-2xl text-center w-full block mb-5">Write Your Review</span>
+                    <span class="font-semibold text-2xl text-center w-full block mb-5">Write Your Review</span>
                     <form action="{% url 'reviews:create' reservation.room.pk %}" method="POST" class="w-1/2 mx-auto">
                         {% csrf_token %}
                         {{form}}

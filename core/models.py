@@ -1,4 +1,5 @@
 from django.db import models
+from . import managers
 
 
 class TimeStampedModel(models.Model):
@@ -9,8 +10,9 @@ class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     # 매번 모델을 저장 할 때 날짜랑 시간을 저장
     updated = models.DateTimeField(auto_now=True)
-
+    objects = managers.CustomModelManager()
     # TimeStampedModel을 db에 등록하지 않고 이것을 사용하는 모델을 db에 등록
     # 이러한 abstractmodel은 모델을 확장하기 위해 사용된다
+
     class Meta:
         abstract = True
